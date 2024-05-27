@@ -12,4 +12,23 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse('About page')
+    context = {
+        'title': 'About us',
+    }
+
+    return render(request, 'main/about.html', context)
+
+def contact(request):
+    context = {
+        'title': 'Contact us',
+    }
+
+    return render(request, 'main/contact.html', context)
+
+
+def services(request):
+    context = {
+        'title': 'Services',
+    }
+
+    return render(request, 'main/services.html', context)
