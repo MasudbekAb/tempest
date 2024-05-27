@@ -5,10 +5,7 @@ from django.shortcuts import render
 
 def index(request):
     context = {
-        'title': 'Shop',
-        'content': 'Furniture for future',
-        'list': 'something else here',
-        'bool': False,
+        'title': 'Home - Main page',
     }
 
     return render(request, 'main/index.html', context)
