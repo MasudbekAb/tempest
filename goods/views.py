@@ -1,6 +1,10 @@
 from django.shortcuts import render
 
 def products(request):
+    context = {
+        'title': 'Products - catalog',
+        
+    }
     return render(request, 'goods/products.html')
 
 
