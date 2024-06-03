@@ -1,7 +1,7 @@
 from email.mime import image
 from os import name
 from django.db import models
-from goods.models import Product
+from goods.models import Aproduct
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -28,7 +28,6 @@ class Media(models.Model):
         verbose_name_plural = _("Media")
 
     def __str__(self):
-        # E:\Azamat Python\1 month\1 lesson\main.py
         element = r"""[\]"""
         return f'Id: {self.id}|Name: {self.file.name.split(element)[-1]}'
 
@@ -46,36 +45,36 @@ class Media(models.Model):
 
 class Carousel(models.Model):
     image = models.ForeignKey(Media, on_delete=models.CASCADE, related_name='carousel_image')
-    price = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='carousel_price')
-    title = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='carousel_title')
+    price = models.ForeignKey(Aproduct, on_delete=models.CASCADE, related_name='carousel_price')
+    title = models.ForeignKey(Aproduct, on_delete=models.CASCADE, related_name='carousel_title')
     short_desc = models.CharField(max_length=200, blank=False)
 
     def __str__(self):
-        return self.title.name
+        return self.title.title
     
 
 class Short_products(models.Model):
     image = models.ForeignKey(Media, on_delete=models.CASCADE, related_name='sh_product_image')
-    title = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sh_title')
-    price = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='sh_price')
+    title = models.ForeignKey(Aproduct, on_delete=models.CASCADE, related_name='sh_title')
+    price = models.ForeignKey(Aproduct, on_delete=models.CASCADE, related_name='sh_price')
 
 
     def __str__(self):
-        return self.title
+        return self.title.title
     
 
 #TODO: code foreign key for comments
 
 
 
-class Nums(models.Model):
-    creativity = models.IntegerField()
-    clients = User.objects.count()
-    products = Product.objects.count()
-    hours = models.IntegerField()
-
-    def __str__(self):
-        return 'Nums'
+#class Nums(models.Model):
+#    creativity = models.IntegerField()
+#    clients = User.objects.count()
+#    products = a_product.objects.count()
+#    hours = models.IntegerField()
+#
+#    def __str__(self):
+#        return 'Nums'
 
 
 class Footer(models.Model):
@@ -137,5 +136,9 @@ class ContactInfo(models.Model):
     phone = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
 
+    def __str(self):
+        return 'ContactInfo'
+    
+    
 
 

@@ -114,7 +114,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = 1
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'cominctempest@gmail.com'
-EMAIL_HOST_PASSWORD = 'tempestisbest'
+EMAIL_HOST_PASSWORD = 'zxmz dugi rjcc qxlx '
 DEFAULT_FROM_EMAIL = 'cominctempest@gmail.com'
 
 
@@ -142,6 +142,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static', 
     ]
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -165,4 +166,6 @@ DJRICHTEXTFIELD_CONFIG = {
 }
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

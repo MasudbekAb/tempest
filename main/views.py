@@ -3,12 +3,12 @@ from django.shortcuts import render, redirect
 from main.models import *
 from django.core.mail import send_mail
 from django.conf import settings
-from .forms import SendLetter
+from .forms import ContactForm  # Ensure the form is imported correctly
+from django.contrib import messages
 
 def index(request):
     carousel = Carousel.objects.all()
     sh_products = Short_products.objects.all()
-    nums = Nums.objects.first()
     footer = Footer.objects.all()
     pluses = Pluses.objects.all()
 
@@ -16,7 +16,6 @@ def index(request):
         'title': 'Home - Main page',
         'carousel': carousel,
         'sh_products': sh_products,
-        'nums': nums,
         'footer': footer,
         'pluses': pluses,
     }
@@ -39,7 +38,7 @@ def about(request):
 
 def contact(request):
     if request.method == 'POST':
-        form = SendLetter(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -68,11 +67,12 @@ def contact(request):
                 recipient_list=recipient_list,
                 fail_silently=False,
             )
-
-            # Redirect to a success page
-            return redirect('success')
+            messages.success(request, 'Your message has been sent successfully!')
+            return redirect('success')  # Ensure you have a URL named 'success'
+        else:
+            messages.error(request, 'There was an error with your submission.')
     else:
-        form = SendLetter()
+        form = ContactForm()
 
     return render(request, 'main/contact.html', {'form': form})
 
@@ -85,3 +85,7 @@ def services(request):
     }
 
     return render(request, 'main/services.html', context)
+
+# Add a simple success view function
+def success(request):
+    return render(request, 'main/success.html', {'title': 'Success'})
