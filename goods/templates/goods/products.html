@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 
@@ -34,8 +34,17 @@
             <div class="product-grid" style="background-image:url({{ product.image.file.url }});">
                 <div class="inner">
                     <p>
-                        <a href="single.html" class="icon"><i class="icon-shopping-cart"></i></a>
-                        <a href="product_1.html" class="icon"><i class="icon-eye"></i></a>
+                        {% if user.is_authenticated %}
+                            {% if product in user.favorite_set.all %}
+                                <a href="{% url 'remove_from_favorite' product_slug=product.title.slug %}" class="icon">Heart<i class="fas icon-heart" style="color: red;"></i></a>
+                            {% else %}
+                                <a href="{% url 'add_to_favorite' product_slug=product.title.slug %}" class="icon">Heart<i class="fa icon-heart"></i></a>
+                            {% endif %}
+                        {% else %}
+                            <i class="far fa-heart"></i>
+                        {% endif %}
+                        <a href="{% url 'add_to_cart' product_slug=product.title.slug %}" class="icon"><i class="icon-shopping-cart"></i></a>
+                        <a href="product/{{ product.title.slug }}" class="icon"><i class="icon-eye"></i></a>
                     </p>
                 </div>
             </div>
@@ -46,7 +55,6 @@
         </div>
     </div>
 {% endfor %}
-
 			
 
 		</div>
