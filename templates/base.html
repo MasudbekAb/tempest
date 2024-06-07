@@ -67,10 +67,14 @@
                             <li><a href="{% url 'services' %}">Services</a></li>
                             <li><a href="{% url 'contact' %}">Contact</a></li>
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'logout' %}">Log out</a></li>
+                            {% csrf_token %}
                                 <li><a href="#">Hello, {{ user.username }}</a></li>
                                 <li><a href="{% url "order_list" %}">Orders</a></li>
                                 <li><a href="{% url "favorite_page" %}">Favorites</a></li>
+                                <form action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">Logout</button>
+                                </form>
                             {% else %}
                                 <li><a href="{% url 'registration' %}">Sign up</a></li>
                                 <li><a href="{% url 'login' %}">Log in</a></li>

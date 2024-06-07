@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserLoginForm, UserRegistrationForm
+from django.contrib.auth import logout
 
 def login_view(request):
     if request.method == 'POST':
@@ -26,3 +27,4 @@ def registration_view(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'users/signup.html', {'form': form})
+
