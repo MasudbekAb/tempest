@@ -1,0 +1,16 @@
+<!-- orders/templates/orders/order_list.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Your Orders</h2>
+    <ul>
+        {% for order in orders %}
+            <li>
+                <a href="{% url 'order_detail' order.id %}">Order {{ order.id }}</a> - Status: {{ order.get_status_display }} - Total Price: ${{ order.total_price }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- orders/templates/orders/order_detail.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Order {{ order.id }}</h2>
+    <p>Status: {{ order.get_status_display }}</p>
+    <p>Total Price: ${{ order.total_price }}</p>
+    <p>Delivery Address: {{ order.delivery_address }}</p>
+    <h3>Items</h3>
+    <ul>
+        {% for item in order.orderitem_set.all %}
+        <li>{{ item.quantity }} of {{ item.product.title }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

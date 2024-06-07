@@ -30,6 +30,7 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('cart/', include('carts.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('orders/', include('orders.urls')),
 ]
 
 

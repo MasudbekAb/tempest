@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-	
 {% block carousel %}
 <aside id="fh5co-hero" class="js-fullheight">
 	<div class="flexslider js-fullheight">
@@ -28,47 +27,46 @@
 </aside>
 {% endblock carousel %}
 
-	{% block pluses %}
-    <div id="fh5co-services" class="fh5co-bg-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-credit-card"></i>
-						</span>
-						<h3>Credit Card</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
+{% block pluses %}
+<div id="fh5co-services" class="fh5co-bg-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-4 text-center">
+				<div class="feature-center animate-box" data-animate-effect="fadeIn">
+					<span class="icon">
+						<i class="icon-credit-card"></i>
+					</span>
+					<h3>Credit Card</h3>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
+					<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
 				</div>
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-wallet"></i>
-						</span>
-						<h3>Save Money</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
+			</div>
+			<div class="col-md-4 col-sm-4 text-center">
+				<div class="feature-center animate-box" data-animate-effect="fadeIn">
+					<span class="icon">
+						<i class="icon-wallet"></i>
+					</span>
+					<h3>Save Money</h3>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
+					<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
 				</div>
-				<div class="col-md-4 col-sm-4 text-center">
-					<div class="feature-center animate-box" data-animate-effect="fadeIn">
-						<span class="icon">
-							<i class="icon-paper-plane"></i>
-						</span>
-						<h3>Free Delivery</h3>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
-						<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
-					</div>
+			</div>
+			<div class="col-md-4 col-sm-4 text-center">
+				<div class="feature-center animate-box" data-animate-effect="fadeIn">
+					<span class="icon">
+						<i class="icon-paper-plane"></i>
+					</span>
+					<h3>Free Delivery</h3>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove</p>
+					<p><a href="#" class="btn btn-primary btn-outline">Learn More</a></p>
 				</div>
 			</div>
 		</div>
 	</div>
-    {% endblock pluses %}
+</div>
+{% endblock pluses %}
 
-
-	{% block cool_products %}
+{% block cool_products %}
 <div id="fh5co-product">
 	<div class="container">
 		<div class="row animate-box">
@@ -80,59 +78,54 @@
 		</div>
 		<div class="row">
 			{% for product in sh_products %}
-    <div class="col-md-4 text-center animate-box">
-        <div class="product">
-            <div class="product-grid" style="background-image:url({{ product.image.file.url }});">
-                <div class="inner">
-                    <p>
-                        {% if user.is_authenticated %}
-                            {% if product in user.favorite_set.all %}
-                                <a href="{% url 'remove_from_favorite' product_slug=product.title.slug %}" class="icon"><i class="fas fa-heart" style="color: red;"></i></a>
-                            {% else %}
-                                <a href="{% url 'add_to_favorite' product_slug=product.title.slug %}" class="icon"><i class="far fa-heart"></i></a>
-                            {% endif %}
+<div class="col-md-4 text-center animate-box">
+    <div class="product">
+        <div class="product-grid" style="background-image:url({{ product.image.file.url }});">
+            <div class="inner">
+                <p>
+                    {% if user.is_authenticated %}
+                        {% if product in user.favorite_set.all %}
+                            <a href="{% url 'remove_from_favorite' product_slug=product.slug %}" class="icon"><i class="fas icon-heart" style="color: red;"></i></a>
                         {% else %}
-                            <i class="far fa-heart"></i>
+                            <a href="{% url 'add_to_favorite' product_slug=product.title.slug %}" class="icon"><i class="fas icon-heart"></i></a>
                         {% endif %}
-                        <a href="{% url 'add_to_cart' product_slug=product.title.slug %}" class="icon"><i class="icon-shopping-cart"></i></a>
-                        <a href="product/{{ product.title.slug }}" class="icon"><i class="icon-eye"></i></a>
-                    </p>
-                </div>
-            </div>
-            <div class="desc">
-                <h3><a href="product_1.html">{{ product.title.title }}</a></h3>
-                <span class="price">{{ product.title.price }}</span>
+                    {% else %}
+                        <i class="far fa-heart"></i>
+                    {% endif %}
+                    <a href="{% url 'product_detail' product.title.slug %}" class="icon"><i class="icon-eye"></i></a>
+                </p>
             </div>
         </div>
     </div>
+</div>
 {% endfor %}
 		</div>
 	</div>
 </div>
 {% endblock cool_products %}
 
-	
-	{% block happy_clients %}
-    <div id="fh5co-testimonial" class="fh5co-bg-section">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>Testimony</span>
-					<h2>Happy Clients</h2>
-				</div>
+{% block happy_clients %}
+<div id="fh5co-testimonial" class="fh5co-bg-section">
+	<div class="container">
+		<div class="row animate-box">
+			<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+				<span>Testimony</span>
+				<h2>Happy Clients</h2>
 			</div>
-			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
-					<div class="row animate-box">
-						<div class="owl-carousel owl-carousel-fullwidth">
-							<div class="item">
-								<div class="testimony-slide active text-center">
-									<figure>
-										<img src="{% static "images/person1.jpg" %}" alt="user">
-									</figure>
-									<span>Jean Doe, via <a href="#" class="twitter">Twitter</a></span>
-									<blockquote>
-										<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+		</div>
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row animate-box">
+					<div class="owl-carousel owl-carousel-fullwidth">
+						<div class="item">
+							<div class="testimony-slide active text-center">
+								<figure>
+									<img src="{% static "images/person1.jpg" %}" alt="user">
+								</figure>
+								<span>Jean Doe, via <a href="#" class="twitter">Twitter</a></span>
+								<blockquote>
+									<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia
+										and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
 									</blockquote>
 								</div>
 							</div>
@@ -164,11 +157,10 @@
 			</div>
 		</div>
 	</div>
-    {% endblock happy_clients %}
+	{% endblock happy_clients %}
 	
-
 	{% block numbers %}
-    <div id="fh5co-counter" class="fh5co-bg fh5co-counter" style="background-image:url({% static "" %});">
+	<div id="fh5co-counter" class="fh5co-bg fh5co-counter" style="background-image:url({% static "images/img_bg_2.jpg" %});">
 		<div class="container">
 			<div class="row">
 				<div class="display-t">
@@ -178,10 +170,10 @@
 								<span class="icon">
 									<i class="icon-eye"></i>
 								</span>
-
+	
 								<span class="counter js-counter" data-from="0" data-to="22070" data-speed="5000" data-refresh-interval="50">1</span>
 								<span class="counter-label">Creativity Fuel</span>
-
+	
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-6 animate-box">
@@ -189,7 +181,7 @@
 								<span class="icon">
 									<i class="icon-shopping-cart"></i>
 								</span>
-
+	
 								<span class="counter js-counter" data-from="0" data-to="450" data-speed="5000" data-refresh-interval="50">1</span>
 								<span class="counter-label">Happy Clients</span>
 							</div>
@@ -208,10 +200,10 @@
 								<span class="icon">
 									<i class="icon-clock"></i>
 								</span>
-
+	
 								<span class="counter js-counter" data-from="0" data-to="5605" data-speed="5000" data-refresh-interval="50">1</span>
 								<span class="counter-label">Hours Spent</span>
-
+	
 							</div>
 						</div>
 					</div>
@@ -219,8 +211,8 @@
 			</div>
 		</div>
 	</div>
-    {% endblock numbers %}
-
+	{% endblock numbers %}
+	
 	{% block newsletter %}
 	<div id="fh5co-started">
 		<div class="container">
@@ -248,4 +240,4 @@
 		</div>
 	</div>
 	{% endblock newsletter %}
-
+	

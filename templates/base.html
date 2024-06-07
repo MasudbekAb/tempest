@@ -69,6 +69,8 @@
                             {% if user.is_authenticated %}
                                 <li><a href="{% url 'logout' %}">Log out</a></li>
                                 <li><a href="#">Hello, {{ user.username }}</a></li>
+                                <li><a href="{% url "order_list" %}">Orders</a></li>
+                                <li><a href="{% url "favorite_page" %}">Favorites</a></li>
                             {% else %}
                                 <li><a href="{% url 'registration' %}">Sign up</a></li>
                                 <li><a href="{% url 'login' %}">Log in</a></li>

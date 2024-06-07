@@ -1,90 +1,77 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block content %}
 <header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner" style="background-image:url({% static "images/img_bg_2.jpg" %});">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2 text-center">
-				<div class="display-t">
-					<div class="display-tc animate-box" data-animate-effect="fadeIn">
-						<h1>Products</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</header>
-
-<div id="fh5co-product">
-	<div class="container">
-		<div class="row animate-box">
-			<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-				<span>Cool Stuff</span>
-				<h2>Products.</h2>
-				<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-			</div>
-		</div>
-		<div class="row">
-			{% for product in products %}
-    <div class="col-md-4 text-center animate-box">
-        <div class="product">
-            <div class="product-grid" style="background-image:url({{ product.image.file.url }});">
-                <div class="inner">
-                    <p>
-                        {% if user.is_authenticated %}
-                            {% if product in user.favorite_set.all %}
-                                <a href="{% url 'remove_from_favorite' product_slug=product.title.slug %}" class="icon">Heart<i class="fas icon-heart" style="color: red;"></i></a>
-                            {% else %}
-                                <a href="{% url 'add_to_favorite' product_slug=product.title.slug %}" class="icon">Heart<i class="fa icon-heart"></i></a>
-                            {% endif %}
-                        {% else %}
-                            <i class="far fa-heart"></i>
-                        {% endif %}
-                        <a href="{% url 'add_to_cart' product_slug=product.title.slug %}" class="icon"><i class="icon-shopping-cart"></i></a>
-                        <a href="product/{{ product.title.slug }}" class="icon"><i class="icon-eye"></i></a>
-                    </p>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <div class="display-t">
+                    <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                        <h1>Products</h1>
+                    </div>
                 </div>
-            </div>
-            <div class="desc">
-                <h3><a href="product_1.html">{{ product.title.title }}</a></h3>
-                <span class="price">{{ product.title.price }}</span>
             </div>
         </div>
     </div>
-{% endfor %}
-			
+</header>
 
-		</div>
-	</div>
+<div id="fh5co-product">
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <span>Cool Stuff</span>
+                <h2>Products.</h2>
+                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 text-center animate-box">
+                    <div class="product">
+                        <div class="product-grid" style="background-image:url({{ product.image.file.url }});">
+                            <div class="inner">
+                                <p>
+                                    <a href="{% url 'add_to_cart' product_id=product.id %}" class="icon"><i class="icon-shopping-cart"></i></a>
+                                    <a href="{% url 'product_detail' product.title.slug %}" class="icon"><i class="icon-eye"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="desc">
+                            <h3><a href="{% url 'product_detail' product.title.slug %}">{{ product.title }}</a></h3>
+                            <span class="price">{{ product.price }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 <div id="fh5co-started">
-	<div class="container">
-		<div class="row animate-box">
-			<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-				<h2>Newsletter</h2>
-				<p>Just stay tune for our latest Product. Now you can subscribe</p>
-			</div>
-		</div>
-		<div class="row animate-box">
-			<div class="col-md-8 col-md-offset-2">
-				<form class="form-inline">
-					<div class="col-md-6 col-sm-6">
-						<div class="form-group">
-							<label for="email" class="sr-only">Email</label>
-							<input type="email" class="form-control" id="email" placeholder="Email">
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6">
-						<button type="submit" class="btn btn-default btn-block">Subscribe</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                <h2>Newsletter</h2>
+                <p>Just stay tune for our latest Product. Now you can subscribe</p>
+            </div>
+        </div>
+        <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2">
+                <form class="form-inline">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <button type="submit" class="btn btn-default btn-block">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
-	
